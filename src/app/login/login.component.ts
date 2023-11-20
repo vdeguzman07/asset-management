@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.http
       .post(
-        `https://reveal-server.netlify.app/.netlify/functions/server/user/login`,
+        `https://reveal-server.netlify.app/.netlify/functions/server/api/v1/user/login`,
         this.credentials.getRawValue()
       )
       .subscribe(
