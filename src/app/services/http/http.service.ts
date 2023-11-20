@@ -57,7 +57,7 @@ export class HttpService {
 
     let URL = `https://reveal-server.netlify.app/.netlify/functions/server/api/v1${endpoint}`; //Change here
 
-    // let URL = `http://localhost:3100/.netlify/functions/server/api/v1${endpoint}`;
+    // ylet URL = `http://localhost:3100/.netlify/functions/server/api/v1${endpoint}`;
     let queryStr = queryArray.join('&') ? '?' + queryArray.join('&') : '';
 
     switch (method) {

@@ -9,7 +9,7 @@ export class AuthService {
 
   login(body: Object) {
     return this.http.post(
-      `https://reveal-server.netlify.app/.netlify/functions/server/api/v1/user/login`,
+      `https://sfeast-server-238a9fe9c893.herokuapp.com/api/v1/auth/login`,
       body
     );
   }
