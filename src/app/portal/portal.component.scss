@@ -1,0 +1,31 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-container {
+  // width: 100%;
+  height: calc(100vh - 64px);
+}
+
+.example-sidenav-content {
+  // width: 100%;
+  background-color: #f9f9f9;
+  // overflow-x: hidden;
+  height: 100%;
+}
+
+.example-sidenav {
+  padding: 20px;
+  width: 14%;
+}
+
+:host ::ng-deep .mat-drawer-content {
+  position: relative;
+  z-index: 1;
+  // display: block;
+  height: 100%;
+  // overflow: hidden;
+}
+
+.list {
+  font-weight: 600;
+}

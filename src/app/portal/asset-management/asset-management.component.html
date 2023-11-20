@@ -1,0 +1,158 @@
+<div class="col-12">
+  <h3 class="mt-0">Manage Assets</h3>
+  <div class="grid">
+    <div class="col-3 mb-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Search</mat-label>
+        <input [formControl]="search" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col flex pt-3 pb-6">
+      <button mat-flat-button color="primary" (click)="onSearch()">
+        Search
+      </button>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12">
+      <mat-card>
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef>Fullname</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b
+                  >{{ element.firstName }} {{ element.lastName }}</b
+                ></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Asset Type</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.type }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef>Brand/Model</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.brand }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="serialNumber">
+            <th mat-header-cell *matHeaderCellDef>Serial No.</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.serialNumber }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="assetTag">
+            <th mat-header-cell *matHeaderCellDef>Asset Tag</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.assetTag }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateReported">
+            <th mat-header-cell *matHeaderCellDef>Date Reported</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{
+                  element.dateReported | date : "mediumDate"
+                }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="issue">
+            <th mat-header-cell *matHeaderCellDef>Issue</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.issue }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{ element.status }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateCompleted">
+            <th mat-header-cell *matHeaderCellDef>Date Completed</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <ng-container>
+                <b>{{
+                  element.dateCompleted | date : "mediumDate"
+                }}</b></ng-container
+              >
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              <span>Actions</span>
+            </th>
+            <td mat-cell *matCellDef="let data" class="pl-2">
+              <button (click)="edit(data)" mat-stroked-button color="primary">
+                Edit
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td
+              *ngIf="!loading"
+              style="text-align: center"
+              class="mat-cell"
+              colspan="10"
+            >
+              <b style="color: #7b7b7b">No data yet.</b>
+            </td>
+            <td colspan="10" *ngIf="loading">
+              <ngx-skeleton-loader
+                count="4"
+                animation="progress-dark"
+                [theme]="{
+                  height: '33px',
+                  'background-color': '#efefef',
+                  border: '1px solid #',
+                  'animation-duration': '1s'
+                }"
+              ></ngx-skeleton-loader>
+            </td>
+          </tr>
+        </table>
+        <mat-paginator
+          style="background-color: rgba(0, 0, 0, 0)"
+          [disabled]="loading"
+          [length]="totalLength"
+          [pageSize]="pagination.pageSize"
+          [pageIndex]="pagination.pageIndex - 1"
+          [pageSizeOptions]="[15, 30, 60, 100]"
+          (page)="onPaginationChange($event)"
+        ></mat-paginator>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<button class="btn" (click)="addAsset()" mat-fab color="primary">
+  <mat-icon>add</mat-icon>
+</button>

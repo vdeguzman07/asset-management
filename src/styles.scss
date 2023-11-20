@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~primeflex/primeflex.css";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+p,
+h3,
+h2,
+h2,
+h4,
+h5,
+span {
+  //   color: #565656;
+}

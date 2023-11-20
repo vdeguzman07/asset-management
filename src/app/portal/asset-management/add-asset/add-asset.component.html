@@ -1,0 +1,168 @@
+<h3 mat-dialog-title>Add Asset</h3>
+<mat-dialog-content>
+  <form [formGroup]="assetForm">
+    <div class="grid">
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="First Name"
+          />
+          <mat-error *ngIf="assetForm.get('firstName')?.hasError('required')"
+            >First name is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input formControlName="lastName" matInput placeholder="Last Name" />
+          <mat-error *ngIf="assetForm.get('lastName')?.hasError('required')"
+            >Last name is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Asset Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="Laptop">Laptop</mat-option>
+            <mat-option value="Headset">Headset</mat-option>
+            <mat-option value="Monitor">Monitor</mat-option>
+            <mat-option value="CPU">CPU</mat-option>
+          </mat-select>
+          <mat-error *ngIf="assetForm.get('type')?.hasError('required')"
+            >Asset Type is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Brand/Model</mat-label>
+          <mat-select formControlName="brand">
+            <mat-option value="Dell Latitude 5410"
+              >Dell Latitude 5410</mat-option
+            >
+            <mat-option value=" Dell Latitude 5420">
+              Dell Latitude 5420</mat-option
+            >
+            <mat-option value="Dell Latitude 5430"
+              >Dell Latitude 5430</mat-option
+            >
+            <mat-option value="Lenovo E14 Thinkpad">
+              Lenovo E14 Thinkpad</mat-option
+            >
+            <mat-option value="Nettdriven ND2200G1">
+              Nettdriven ND2200G1</mat-option
+            >
+            <mat-option value="Jabra Biz Duo 1500">
+              Jabra Biz Duo 1500</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="assetForm.get('brand')?.hasError('required')"
+            >Brand/Model is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Date Reported</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateReported"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Serial No.</mat-label>
+          <input
+            formControlName="serialNumber"
+            matInput
+            placeholder="Serial No."
+          />
+          <mat-error *ngIf="assetForm.get('serialNumber')?.hasError('required')"
+            >Serial No. is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Asset Tag</mat-label>
+          <input formControlName="assetTag" matInput placeholder="Asset Tag" />
+          <mat-error *ngIf="assetForm.get('assetTag')?.hasError('required')"
+            >Asset Tag is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Issue</mat-label>
+          <input formControlName="issue" matInput placeholder="Issue" />
+          <mat-error *ngIf="assetForm.get('issue')?.hasError('required')"
+            >Issue is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="Reported to the vendor"
+              >Reported to the vendor</mat-option
+            >
+            <mat-option value="Cancelled">Cancelled</mat-option>
+            <mat-option value="Repaired">Repaired</mat-option>
+            <mat-option value="ATD">ATD</mat-option>
+          </mat-select>
+          <mat-error *ngIf="assetForm.get('status')?.hasError('required')"
+            >Status is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Date Completed</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            formControlName="dateCompleted"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button color="warn" mat-stroked-button matDialogClose>Cancel</button>
+  <button
+    [disabled]="!assetForm.valid || saving"
+    color="primary"
+    mat-flat-button
+    (click)="addAsset()"
+  >
+    Save Asset
+  </button>
+</mat-dialog-actions>
