@@ -158,7 +158,7 @@
 <mat-dialog-actions align="center">
   <button color="warn" mat-stroked-button matDialogClose>Cancel</button>
   <button
-    [disabled]="!assetForm.valid || saving"
+    [disabled]="!assetForm.valid || saving || !assetForm.dirty"
     color="primary"
     mat-flat-button
     (click)="addAsset()"

@@ -29,7 +29,9 @@ export class AddAssetComponent implements OnInit {
     private asset: AssetService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.data) this.assetForm.patchValue(this.data);
+  }
 
   addAsset() {
     this.saving = true;

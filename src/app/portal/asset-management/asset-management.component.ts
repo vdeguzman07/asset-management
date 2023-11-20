@@ -119,6 +119,11 @@ export class AssetManagementComponent implements OnInit {
 
   edit(data: any) {
     console.log(data);
+    this.dialog.open(AddAssetComponent, {
+      disableClose: true,
+      width: '70%',
+      data: data,
+    });
   }
 
   onPaginationChange(event: PageEvent) {
