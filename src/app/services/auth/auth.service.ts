@@ -9,7 +9,7 @@ export class AuthService {
 
   login(body: Object) {
     return this.http.post(
-      `http://localhost:3100/.netlify/functions/server/api/v1/user/login`,
+      `https://reveal-server.netlify.app/.netlify/functions/server/api/v1/user/login`,
       body
     );
   }
