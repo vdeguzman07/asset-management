@@ -2,7 +2,7 @@
   "/api": {
     "target": "https://reveal-server.netlify.app/.netlify/functions/server",
     "secure": false,
-    "changeOrigin": true,
+    "changeOrigin": false,
     "pathRewrite": {
       "^/api": ""
     }
