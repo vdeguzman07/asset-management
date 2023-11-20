@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.credentials.getRawValue()).subscribe(
       (res: any) => {
         console.log(res);
-        this.loading = false;
         const user = JSON.stringify(res.user);
         localStorage.setItem('BEARER_TOKEN', res.token);
         localStorage.setItem('USER', user);
         this.router.navigate(['/portal']);
+        this.loading = false;
       },
       (err) => {
         console.log(err);
