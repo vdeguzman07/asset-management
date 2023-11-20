@@ -2,6 +2,11 @@
     publish = "dist/asset-management"
     command = "ng build"
     base="/"
+    [[redirects]]
+  from = '/*'
+  to = 'https://reveal-server.netlify.app/.netlify/functions/server'
+  force = true
+  status = 200
 [[redirects]]
     from="/*"
     to="/index.html"
