@@ -1,0 +1,127 @@
+.header-wrapper {
+  width: 100%;
+  height: 11.5vh;
+  padding: 1.5rem 0rem;
+  //   background-image: linear-gradient(to right, #130763, #0c084e, #0c0439);
+  background-color: #3f51b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    color: #fff;
+    transform: scale(4);
+  }
+}
+.header-add {
+  width: 100%;
+  height: 10vh;
+  padding: 1.5rem 0rem;
+  background: #2b7abf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    color: #fff;
+    transform: scale(4);
+  }
+}
+.header-delete {
+  width: 100%;
+  height: 10vh;
+  padding: 1.5rem 0rem;
+  background: #da4b5d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    color: #fff;
+    transform: scale(4);
+  }
+}
+.header-update {
+  width: 100%;
+  height: 10vh;
+  padding: 1.5rem 0rem;
+  background: #3bbb95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mat-icon {
+    color: #fff;
+    transform: scale(4);
+  }
+}
+
+.contents {
+  width: 90%;
+  margin: auto;
+  h3 {
+    color: #565656;
+    text-align: center;
+    letter-spacing: 0.1rem;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.btn-container {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  .btn-yes {
+    width: 40%;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    margin: 0rem 1rem;
+    padding: 0.7rem 0rem;
+    background-color: #3f51b5;
+    color: #fff;
+  }
+  .btn-no {
+    width: 40%;
+    outline: none;
+    color: #565656;
+    cursor: pointer;
+    border: none;
+    background: #f4f4f4;
+    margin: 0rem 1rem;
+    padding: 0.7rem 0rem;
+  }
+}
+
+.btn-others {
+  background-image: linear-gradient(to right, #130763, #0c084e, #0c0439);
+  color: #fff;
+}
+.btn-default {
+  background: var(--tangerine);
+  color: #fff;
+}
+.btn-add {
+  background: #2b7abf;
+  color: #fff;
+}
+.btn-update {
+  background: #3bbb95;
+  color: #fff;
+}
+
+.btn-delete {
+  background: #f4f4f4;
+  color: #da4b5d;
+}
+
+.triangle-others {
+  width: 0;
+  height: 0;
+  border: 30px solid transparent;
+  border-top: 0;
+  border-bottom: 20px solid #3f51b5;
+  margin: auto;
+  transform: rotate(180deg);
+}

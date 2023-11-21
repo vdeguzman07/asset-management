@@ -19,9 +19,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AddAssetComponent } from './add-asset/add-asset.component';
+import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
 
 @NgModule({
-  declarations: [AssetManagementComponent, AddAssetComponent],
+  declarations: [AssetManagementComponent, AddAssetComponent, AreYouSureComponent],
   imports: [
     CommonModule,
     AssetManagementRoutingModule,

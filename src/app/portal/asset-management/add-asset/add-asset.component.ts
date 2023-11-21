@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AssetService } from 'src/app/services/asset/asset.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class AddAssetComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AddAssetComponent>,
     private fb: FormBuilder,
-    private asset: AssetService
+    private asset: AssetService,
+    private sb: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,25 @@ export class AddAssetComponent implements OnInit {
     const value = this.assetForm.getRawValue();
     console.log(value);
     this.asset.createAsset(value).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.saving = false;
+        this.dialogRef.close(true);
+      },
+      (err) => {
+        console.log(err);
+        this.sb.open(`${err.error.message}`, 'Okay', { duration: 3000 });
+        this.saving = false;
+      }
+    );
+  }
+
+  updateAsset() {
+    this.saving = true;
+    const value = this.assetForm.getRawValue();
+    console.log(value);
+
+    this.asset.updateAsset(this.data._id, value).subscribe(
       (res: any) => {
         console.log(res);
         this.saving = false;

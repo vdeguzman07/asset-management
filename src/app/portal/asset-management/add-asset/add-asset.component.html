@@ -161,8 +161,8 @@
     [disabled]="!assetForm.valid || saving || !assetForm.dirty"
     color="primary"
     mat-flat-button
-    (click)="addAsset()"
+    (click)="data ? updateAsset() : addAsset()"
   >
-    Save Asset
+    {{ data ? "Update Asset" : "Save Asset" }}
   </button>
 </mat-dialog-actions>

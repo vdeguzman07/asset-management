@@ -14,4 +14,8 @@ export class AssetService {
   createAsset(body: any) {
     return this.http.start('post', '/asset/createAsset', body);
   }
+
+  updateAsset(id: string, body: any) {
+    return this.http.start('put', `/asset/${id}`, { body });
+  }
 }

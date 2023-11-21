@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           const user = JSON.stringify(res.user);
           localStorage.setItem('BEARER_TOKEN', res.token);
           localStorage.setItem('USER', user);
-          // this.router.navigate(['/portal/assets']);
+          this.router.navigate(['/portal/assets']);
           this.loading = false;
         },
         (err) => {
