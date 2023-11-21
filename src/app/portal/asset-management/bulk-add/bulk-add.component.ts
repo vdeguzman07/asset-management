@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { retry } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bulk-add',
@@ -15,7 +16,8 @@ export class BulkAddComponent implements OnInit {
   constructor(
     private asset: AssetService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<BulkAddComponent>
+    public dialogRef: MatDialogRef<BulkAddComponent>,
+    private sb: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -97,27 +99,26 @@ export class BulkAddComponent implements OnInit {
   addBulkData() {
     this.downloading = true;
     this.dataSource.forEach((el: any) => {
-      this.asset
-        .createAsset(el)
-        .pipe(retry(5))
-        .subscribe(
-          (res: any) => {
-            console.log(res);
-            if (res) this.total = this.total + 1;
-            if (this.total === this.dataSource.length) {
-              this.downloading = false;
-              this.dialogRef.close(true);
-            }
-          },
-          (err) => {
-            console.log(err);
-            this.total = this.total + 1;
-            if (this.total === this.dataSource.length) {
-              this.downloading = false;
-              this.dialogRef.close(true);
-            }
+      this.asset.createAsset(el).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) this.total = this.total + 1;
+          if (this.total === this.dataSource.length) {
+            this.downloading = false;
+            this.dialogRef.close(true);
           }
-        );
+        },
+        (err) => {
+          console.log(err);
+          this.sb.open(`${err.error.message}`, 'Okay', { duration: 2500 });
+          this.total = this.total + 1;
+
+          if (this.total === this.dataSource.length) {
+            this.downloading = false;
+            this.dialogRef.close(true);
+          }
+        }
+      );
     });
   }
 }
