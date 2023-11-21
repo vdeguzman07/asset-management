@@ -20,6 +20,7 @@ export class AddAssetComponent implements OnInit {
     assetTag: new FormControl('', [Validators.required]),
     issue: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
+    remarks: new FormControl(''),
     dateCompleted: new FormControl(''),
   });
   saving: boolean = false;

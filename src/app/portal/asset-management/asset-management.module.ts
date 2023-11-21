@@ -20,9 +20,16 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AddAssetComponent } from './add-asset/add-asset.component';
 import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
+import { BulkAddComponent } from './bulk-add/bulk-add.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [AssetManagementComponent, AddAssetComponent, AreYouSureComponent],
+  declarations: [
+    AssetManagementComponent,
+    AddAssetComponent,
+    AreYouSureComponent,
+    BulkAddComponent,
+  ],
   imports: [
     CommonModule,
     AssetManagementRoutingModule,
@@ -43,6 +50,7 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
     MatSelectModule,
     MatSnackBarModule,
     NgxSkeletonLoaderModule,
+    MatTooltipModule,
   ],
 })
 export class AssetManagementModule {}

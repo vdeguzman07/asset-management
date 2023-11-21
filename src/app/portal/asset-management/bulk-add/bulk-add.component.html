@@ -1,0 +1,57 @@
+<div mat-dialog-title class="mb-0">
+  <input (change)="onFileChange($event)" type="file" multiple />
+  <p class="text-center m-0 mt-2">Select xlsx file</p>
+  <button class="btn" type="submit">Upload</button>
+  <hr />
+  <div class="grid">
+    <div class="col-1 text-xs text-center pb-0"><b>First Name</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Last Name</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Asset Type</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Brand/Model</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Date Reported</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Serial No.</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Asset Tag</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Issue</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Status</b></div>
+    <div class="col-1 text-xs text-center pb-0"><b>Date Completed</b></div>
+    <div class="col-2 text-xs text-center pb-0"><b>Remarks</b></div>
+  </div>
+  <p *ngIf="downloading" class="m-1 text-center text-sm">
+    <b>{{ total }}/{{ dataSource.length }} downloading...</b>
+  </p>
+</div>
+<mat-dialog-content>
+  <div class="grid" *ngIf="!dataSource.length">
+    <div class="col-12 text-center">No Data Yet.</div>
+  </div>
+  <div class="grid">
+    <ng-container *ngFor="let data of dataSource">
+      <div class="col-1 text-xs pb-0">{{ data.firstName }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.lastName }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.type }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.brand }}</div>
+      <div class="col-1 text-xs pb-0">
+        {{ data.dateReported | date : "mediumDate" }}
+      </div>
+      <div class="col-1 text-xs pb-0">{{ data.serialNumber }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.assetTag }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.issue }}</div>
+      <div class="col-1 text-xs pb-0">{{ data.status }}</div>
+      <div class="col-1 text-xs pb-0">
+        {{ data.dateCompleted | date : "mediumDate" }}
+      </div>
+      <div class="col-2 text-xs pb-0 text-center">{{ data.remarks }}</div>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button
+    (click)="addBulkData()"
+    *ngIf="dataSource.length"
+    color="primary"
+    mat-flat-button
+    [disabled]="downloading"
+  >
+    Insert All {{ dataSource.length }} Datas
+  </button>
+</mat-dialog-actions>

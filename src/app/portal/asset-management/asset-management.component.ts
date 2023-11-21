@@ -7,6 +7,8 @@ import { AssetService } from 'src/app/services/asset/asset.service';
 import { AddAssetComponent } from './add-asset/add-asset.component';
 import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as XLSX from 'xlsx';
+import { BulkAddComponent } from './bulk-add/bulk-add.component';
 
 @Component({
   selector: 'app-asset-management',
@@ -28,6 +30,11 @@ export class AssetManagementComponent implements OnInit {
   };
 
   search = new FormControl('');
+
+  columns: any = [
+    { name: 'First Name', col: 'firstName' },
+    { name: 'Last Name', col: 'lastName' },
+  ];
 
   displayedColumns = [
     'fullName',
@@ -181,5 +188,120 @@ export class AssetManagementComponent implements OnInit {
     this.defaultQuery.page = pageIndex + 1;
     this.defaultQuery.limit = pageSize;
     this.fetchAssets(this.defaultQuery);
+  }
+
+  downloadFormat() {
+    let headers = [
+      [
+        'First Name',
+        'Last Name',
+        'Asset Type',
+        'Brand/Model',
+        'Date Reported',
+        'Serial Number',
+        'Asset Tag',
+        'Issue',
+        'Status',
+        'Date Completed',
+        'Remarks',
+      ],
+    ];
+
+    const wb = XLSX.utils.book_new();
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([]);
+    XLSX.utils.sheet_add_aoa(ws, headers);
+
+    //Starting in the second row to avoid overriding and skipping headers
+    // XLSX.utils.sheet_add_json(ws, arr, { origin: 'A2', skipHeader: true });
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, 'assets.xlsx');
+  }
+
+  onFileChange(event: any) {
+    // console.log(event);
+    let workBook: any = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    console.log(reader);
+    const file = event.target.files[0];
+
+    reader.onload = (event) => {
+      console.log(event);
+      const data = reader.result;
+      workBook = XLSX.read(data, { type: 'binary', cellDates: true });
+      jsonData = workBook.SheetNames.reduce((initial: any, name: any) => {
+        const sheet = workBook.Sheets[name];
+        initial[name] = XLSX.utils.sheet_to_json(sheet);
+        return initial;
+      }, {});
+
+      console.log(jsonData);
+      this.transformExcelData(jsonData);
+    };
+    reader.readAsBinaryString(file);
+  }
+
+  transformExcelData(data: any) {
+    // console.log(data);
+    let i: any = [];
+    const excelData = data.Sheet1;
+    console.log(excelData);
+    for (let item of excelData) {
+      let key = Object.keys(item);
+      let values = Object.values(item);
+      let x;
+      let firstName,
+        lastName,
+        type,
+        brand,
+        dateReported,
+        serialNumber,
+        assetTag,
+        issue,
+        status,
+        dateCompleted,
+        remarks;
+      console.log(key, values);
+      // for (let el of this.columns) {
+      if (key[0] === 'First Name') firstName = values[0];
+      if (key[1] === 'Last Name') lastName = values[1];
+      if (key[2] === 'Asset Type') type = values[2];
+      if (key[3] === 'Brand/Model') brand = values[3];
+      if (key[4] === 'Date Reported') dateReported = values[4];
+      if (key[5] === 'Serial Number') serialNumber = values[5];
+      if (key[6] === 'Asset Tag') assetTag = values[6];
+      if (key[7] === 'Issue') issue = values[7];
+      if (key[8] === 'Status') status = values[8];
+      if (key[9] === 'Date Completed') dateCompleted = values[9];
+      if (key[10] === 'Remarks') remarks = values[10];
+      i.push({
+        firstName: firstName,
+        lastName: lastName,
+        type: type,
+        brand: brand,
+        dateReported: dateReported,
+        serialNumber: serialNumber,
+        assetTag: assetTag,
+        issue: issue,
+        status: status,
+        remarks: remarks,
+        dateCompleted: dateCompleted,
+      });
+    }
+    // console.log(i);
+  }
+
+  openBulk() {
+    this.dialog
+      .open(BulkAddComponent, {
+        width: '100%',
+        panelClass: 'dialog-no-padding',
+      })
+      .afterClosed()
+      .subscribe((res: any) => {
+        if (res) this.fetchAssets({});
+      });
   }
 }

@@ -7,9 +7,32 @@
         <input [formControl]="search" matInput />
       </mat-form-field>
     </div>
-    <div class="col flex pt-3 pb-6">
+    <div class="col-1 flex pt-3 pb-6">
       <button mat-flat-button color="primary" (click)="onSearch()">
         Search
+      </button>
+    </div>
+    <div
+      class="col-8 flex justify-content-end align-content-end flex-wrap pb-3"
+    >
+      <!-- <input type="file" (change)="onFileChange($event)" />
+      <button (click)="downloadFormat()">Export Excel Format</button> -->
+      <button
+        mat-mini-fab
+        color="primary"
+        matTooltip="Insert Bulk Data"
+        class="mr-2 mb-3"
+        (click)="openBulk()"
+      >
+        <mat-icon>upload</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        matTooltip="Export Excel Format"
+        (click)="downloadFormat()"
+        color="accent"
+      >
+        <mat-icon>download</mat-icon>
       </button>
     </div>
   </div>

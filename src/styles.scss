@@ -23,3 +23,9 @@ h5,
 span {
   //   color: #565656;
 }
+
+.dialog-no-padding .mat-dialog-container {
+  /* add your styles */
+  padding-top: 0 !important;
+  background-color: #f4f7fa !important;
+}
