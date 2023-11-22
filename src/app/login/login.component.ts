@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (res: any) => {
-          console.log(res);
+          // console.log(res);
           const user = JSON.stringify(res.user);
           localStorage.setItem('BEARER_TOKEN', res.token);
           localStorage.setItem('USER', user);

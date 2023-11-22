@@ -15,8 +15,16 @@
     <div
       class="col-8 flex justify-content-end align-content-end flex-wrap pb-3"
     >
-      <!-- <input type="file" (change)="onFileChange($event)" />
-      <button (click)="downloadFormat()">Export Excel Format</button> -->
+      <button
+        mat-mini-fab
+        style="background-color: #16a085"
+        color="primary"
+        matTooltip="Export Data"
+        class="mr-2 mb-3"
+        (click)="exportData()"
+      >
+        <mat-icon>view_quilt</mat-icon>
+      </button>
       <button
         mat-mini-fab
         color="primary"

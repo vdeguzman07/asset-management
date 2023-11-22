@@ -9,6 +9,7 @@ import { AreYouSureComponent } from './are-you-sure/are-you-sure.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as XLSX from 'xlsx';
 import { BulkAddComponent } from './bulk-add/bulk-add.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-asset-management',
@@ -241,6 +242,76 @@ export class AssetManagementComponent implements OnInit {
       this.transformExcelData(jsonData);
     };
     reader.readAsBinaryString(file);
+  }
+
+  downloading = false;
+
+  exportData() {
+    this.downloading = true;
+    console.log(this.defaultQuery);
+    let dataSource: any = [];
+    const query = this.defaultQuery;
+    query.limit = 1;
+    let totalDocuments = 0;
+    // const limit = 3;
+    this.asset.getAssets(query).subscribe((res: any) => {
+      // console.log(res);
+      totalDocuments = res.total_docs;
+      let index = 0;
+      const batchSize = 30;
+      const batch = Math.ceil(totalDocuments / batchSize);
+      for (let i = 0; i < batch; i++) {
+        this.defaultQuery.limit = batchSize;
+        this.defaultQuery.page = i + 1;
+        this.asset.getAssets(this.defaultQuery).subscribe((res: any) => {
+          // console.log(res);
+          if (res) {
+            dataSource.push(...res.assets);
+            index++;
+            // console.log(batch, index);
+            if (index === batch) {
+              this.downloading = false;
+              console.log('Done');
+              let toExport = dataSource.map((d: any) => {
+                // let date =
+                //   formatDate(
+                //     d?.dateReported,
+                //     'MMM-dd-yyyy',
+                //     'en-US',
+                //     '+0800'
+                //   ) || '';
+                // let completed =
+                //   formatDate(
+                //     d?.dateCompleted,
+                //     'MMM-dd-yyyy',
+                //     'en-US',
+                //     '+0800'
+                //   ) || '';
+                return {
+                  'First Name': d.firstName,
+                  'Last Name': d.lastName,
+                  'Asset Type': d.type,
+                  'Brand/Model': d.brand,
+                  'Date Reported': d.dateReported,
+                  'Serial Number': d.serialNumber,
+                  'Asset Tag': d.assetTag,
+                  Issue: d.issue,
+                  Status: d.status,
+                  'Date Completed': d.dateCompleted,
+                  Remarks: d.remarks,
+                };
+              });
+
+              const wb: XLSX.WorkBook = XLSX.utils.book_new();
+              const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(toExport);
+
+              XLSX.utils.book_append_sheet(wb, ws, `${name}`);
+              XLSX.writeFile(wb, `Assets.xlsx`);
+            }
+          }
+        });
+      }
+    });
   }
 
   transformExcelData(data: any) {
