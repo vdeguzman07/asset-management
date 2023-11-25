@@ -13,14 +13,19 @@
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav pt-1" mode="side">
     <mat-selection-list [multiple]="false">
-      <mat-list-option>
-        <mat-icon
-          [routerLink]="['/assets']"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          mat-list-icon
-          >devices</mat-icon
-        ><span>Assets</span>
+      <mat-list-option
+        [routerLink]="['/portal/dashboard']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon mat-list-icon>dashboard</mat-icon><span>Dashboard</span>
+      </mat-list-option>
+      <mat-list-option
+        [routerLink]="['/portal/assets']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon mat-list-icon>devices</mat-icon><span>Assets</span>
       </mat-list-option>
     </mat-selection-list>
   </mat-drawer>

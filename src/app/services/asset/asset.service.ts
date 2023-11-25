@@ -18,4 +18,12 @@ export class AssetService {
   updateAsset(id: string, body: any) {
     return this.http.start('put', `/asset/${id}`, { body });
   }
+
+  dashboard() {
+    return this.http.start('get', `/dashboard/dashboard-data`, {});
+  }
+
+  getDashboardCompletion() {
+    return this.http.start('get', `/dashboard/dashboard`, {});
+  }
 }

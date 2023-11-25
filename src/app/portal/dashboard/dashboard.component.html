@@ -1,0 +1,46 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="grid">
+      <ng-container *ngFor="let item of statuses">
+        <div class="col-3">
+          <div class="card">
+            <div class="grid">
+              <div class="col-12">
+                <div class="grid">
+                  <div class="col-10">
+                    <p class="name">{{ item.name }}</p>
+                    <p class="value" *ngIf="!loading">{{ item.value }}</p>
+                    <mat-spinner *ngIf="loading" [diameter]="35"></mat-spinner>
+                  </div>
+                  <div
+                    class="col-2 flex justify-content-center align-items-center"
+                  >
+                    <i class="fa-solid {{ item.icon }} icn"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <div class="col-8">
+    <highcharts-chart
+      *ngIf="!loading"
+      [Highcharts]="highCharts"
+      [options]="options"
+      style="width: 100%; height: auto; display: block"
+    ></highcharts-chart>
+  </div>
+  <div class="col-4">
+    <highcharts-chart
+      *ngIf="!loadingpie"
+      [Highcharts]="highCharts"
+      [options]="pieOptions"
+      style="width: 100%; display: block"
+    ></highcharts-chart>
+  </div>
+</div>

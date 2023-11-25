@@ -19,6 +19,11 @@ const routes: Routes = [
             (m) => m.AssetManagementModule
           ),
       },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
     ],
   },
 ];
